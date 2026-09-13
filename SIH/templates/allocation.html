@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NER-CryoVault — Allocation</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='allocation.css')}}"
+    />
+  </head>
+  <body>
+    <section id="page-allocation" class="active">
+      <!-- Small top nav, same as the terminal page -->
+      <nav class="top-nav">
+        <div class="top-nav-brand">
+          <svg
+            viewBox="0 0 48 48"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              x="6"
+              y="8"
+              width="36"
+              height="34"
+              rx="4"
+              stroke="#4FA688"
+              stroke-width="2.4"
+            />
+            <path
+              d="M14 8V4M34 8V4"
+              stroke="#4FA688"
+              stroke-width="2.4"
+              stroke-linecap="round"
+            />
+            <path
+              d="M24 18v14M18 22l6-4 6 4M18 28l6 4 6-4"
+              stroke="#8FE3B8"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span>NER-CryoVault</span>
+        </div>
+        <div class="top-nav-links">
+          <a class="top-nav-link" href="index.html">Terminal</a>
+          <a class="top-nav-link active" href="allocation.html">Allocation</a>
+        </div>
+      </nav>
+
+      <div class="allocation-body">
+        <!-- Three.js renders the crate rack into this element -->
+        <div id="cube-scene" class="cube-scene"></div>
+
+        <div class="rack-overlay">
+          <p class="rack-title">Cold storage rack</p>
+          <p class="rack-sub">5 × 4 × 3 — 60 crates</p>
+        </div>
+
+        <div class="rack-legend">
+          <span class="legend-dot glow"></span> Occupied
+          <span class="legend-dot"></span> Empty
+        </div>
+
+        <p class="rack-hint">Drag to rotate</p>
+      </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="{{url_for('static', filename='allocation.js')}}"></script>
+  </body>
+</html>

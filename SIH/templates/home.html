@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NER-CryoVault — Cold Storage Terminal</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+  <body>
+    <!-- ===================== PAGE 1 — WELCOME ===================== -->
+    <section id="page-welcome">
+      <div class="welcome-wrap">
+        <div class="brand-mark">
+          <svg
+            viewBox="0 0 48 48"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              x="6"
+              y="8"
+              width="36"
+              height="34"
+              rx="4"
+              stroke="#4FA688"
+              stroke-width="2.4"
+            />
+            <path
+              d="M14 8V4M34 8V4"
+              stroke="#4FA688"
+              stroke-width="2.4"
+              stroke-linecap="round"
+            />
+            <path
+              d="M24 18v14M18 22l6-4 6 4M18 28l6 4 6-4"
+              stroke="#8FE3B8"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <h1 class="brand-name">NER-CryoVault</h1>
+        </div>
+        <p class="brand-tag">
+          Solar-powered mini cold storage terminal. Select a stored vegetable to
+          check its current condition.
+        </p>
+        <button id="welcome-btn" type="button">Welcome</button>
+      </div>
+    </section>
+
+    <!-- ===================== PAGE 2 — TERMINAL ===================== -->
+    <section id="page-terminal">
+      <!-- Small top nav -->
+      <nav class="top-nav">
+        <div class="top-nav-brand">
+          <svg
+            viewBox="0 0 48 48"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              x="6"
+              y="8"
+              width="36"
+              height="34"
+              rx="4"
+              stroke="#4FA688"
+              stroke-width="2.4"
+            />
+            <path
+              d="M14 8V4M34 8V4"
+              stroke="#4FA688"
+              stroke-width="2.4"
+              stroke-linecap="round"
+            />
+            <path
+              d="M24 18v14M18 22l6-4 6 4M18 28l6 4 6-4"
+              stroke="#8FE3B8"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span>NER-CryoVault</span>
+        </div>
+        <div class="top-nav-links">
+          <a class="top-nav-link" href="{{ url_for('home') }}">Terminal</a>
+          <a
+            class="top-nav-link"
+            href="{{ url_for('allocation') }}"
+            id="nav-allocation"
+          >
+            Allocation
+          </a>
+          <a
+            class="top-nav-link"
+            href="{{ url_for('simulation') }}"
+            id="nav-simulation"
+            >Simulation</a
+          >
+        </div>
+      </nav>
+
+      <div class="terminal-main">
+        <!-- Left: screen -->
+        <div class="screen-unit">
+          <div class="screen-glass">
+            <div>
+              <h2 class="screen-heading" id="screen-heading">
+                Select a vegetable
+              </h2>
+              <p class="screen-sub" id="screen-sub">
+                Enter the code for the vegetable you'd like to check, then press
+                Enter.
+              </p>
+            </div>
+
+            <div class="code-display" aria-live="polite">
+              <span class="code-display-label" id="code-display-label"
+                >Code</span
+              >
+              <div class="code-display-digits" id="code-display-digits"></div>
+            </div>
+
+            <div class="screen-main idle" id="screen-main">
+              <p class="idle-text" id="idle-text">Waiting for input…</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Middle: vertical code directory, beside the screen -->
+        <div class="veg-chart-panel">
+          <p class="veg-chart-panel-title">Code directory</p>
+          <div class="veg-chart-list" id="veg-chart-grid">
+            <!-- filled by JS -->
+          </div>
+        </div>
+
+        <!-- Right: fingerprint + keypad + pdf -->
+        <div class="control-unit">
+          <div class="fingerprint-wrap">
+            <button
+              class="fingerprint"
+              id="fingerprint"
+              type="button"
+              aria-label="Fingerprint scanner (demo)"
+            >
+              <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="47" class="fp-ring" />
+                <g class="fp-lines" stroke-linecap="round" fill="none">
+                  <path d="M50 20c-16 0-29 13-29 30 0 8 3 15 8 21" />
+                  <path d="M50 14c-20 0-36 16-36 36 0 10 4 19 10 26" />
+                  <path d="M50 26c-13 0-23 10-23 24 0 12 6 20 13 27" />
+                  <path d="M50 32c-10 0-17 8-17 18 0 14 8 22 17 30" />
+                  <path d="M50 38c-7 0-12 5-12 12 0 15 10 24 21 31" />
+                  <path d="M62 24c9 6 15 16 15 27 0 6-1 11-4 16" />
+                  <path d="M65 33c6 5 9 12 9 19 0 9-3 16-8 22" />
+                  <path d="M68 44c3 3 5 8 5 13 0 8-3 14-8 19" />
+                  <path d="M50 50v8" />
+                </g>
+                <line x1="8" y1="50" x2="92" y2="50" class="fp-scan" />
+              </svg>
+            </button>
+            <p class="fingerprint-label">Fingerprint ID (demo)</p>
+          </div>
+
+          <div class="keypad-frame">
+            <p class="dialpad-label">Keypad</p>
+            <div class="keypad" id="keypad">
+              <button class="key" data-key="1">1</button>
+              <button class="key" data-key="2">2</button>
+              <button class="key" data-key="3">3</button>
+              <button class="key" data-key="4">4</button>
+              <button class="key" data-key="5">5</button>
+              <button class="key" data-key="6">6</button>
+              <button class="key" data-key="7">7</button>
+              <button class="key" data-key="8">8</button>
+              <button class="key" data-key="9">9</button>
+              <button
+                class="key backspace"
+                data-key="backspace"
+                aria-label="Backspace"
+              >
+                ⌫
+              </button>
+              <button class="key" data-key="0">0</button>
+              <button class="key enter" data-key="enter" aria-label="Enter">
+                ENT
+              </button>
+            </div>
+          </div>
+
+          <div class="pdf-box">
+            <div class="pdf-box-icon" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 2h9l5 5v15a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1Z"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                />
+                <path
+                  d="M14 2v6h6"
+                  stroke="currentColor"
+                  stroke-width="1.4"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </div>
+            <div class="pdf-box-text">
+              <p class="pdf-box-title">Storage report</p>
+              <p class="pdf-box-sub">Sensor &amp; nutrition log</p>
+            </div>
+            <button class="pdf-box-btn" id="pdf-download-btn" type="button">
+              Download PDF
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>

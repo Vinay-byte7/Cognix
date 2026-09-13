@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NER-CryoVault — Simulation</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}" />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='simulation.css')}}"
+    />
+  </head>
+  <body>
+    <section id="page-simulation" class="active">
+      <!-- Small top nav, same as the other pages -->
+      <nav class="top-nav">
+        <div class="top-nav-brand">
+          <svg
+            viewBox="0 0 48 48"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              x="6"
+              y="8"
+              width="36"
+              height="34"
+              rx="4"
+              stroke="#4FA688"
+              stroke-width="2.4"
+            />
+            <path
+              d="M14 8V4M34 8V4"
+              stroke="#4FA688"
+              stroke-width="2.4"
+              stroke-linecap="round"
+            />
+            <path
+              d="M24 18v14M18 22l6-4 6 4M18 28l6 4 6-4"
+              stroke="#8FE3B8"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          <span>NER-CryoVault</span>
+        </div>
+        <div class="top-nav-links">
+          <a class="top-nav-link" href="index.html">Terminal</a>
+          <a class="top-nav-link" href="allocation.html">Allocation</a>
+          <a class="top-nav-link active" href="simulation.html">Simulation</a>
+        </div>
+      </nav>
+
+      <div class="sim-main">
+        <!-- Left: the 3D model. All input now happens on the modeled
+           control-panel keypad inside the scene itself — click a key
+           on the unit to enter a code/weight. -->
+        <div class="sim-canvas-card">
+          <div id="sim-scene" class="sim-scene"></div>
+
+          <div class="sim-overlay-top">
+            <p class="sim-overlay-title">Cold Storage Simulation</p>
+            <p class="sim-overlay-sub">
+              Click the keypad on the unit's control panel to enter a code and
+              weight
+            </p>
+          </div>
+
+          <div class="sim-status-bar">
+            <span class="sim-status-dot idle" id="sim-status-dot"></span>
+            <p id="sim-status-line">System idle</p>
+          </div>
+
+          <p class="sim-hint">
+            Drag to orbit &middot; click a keypad button to enter digits
+          </p>
+        </div>
+
+        <!-- Right: code directory reference only -->
+        <div class="sim-side">
+          <div class="veg-chart-panel sim-chart-panel">
+            <p class="veg-chart-panel-title">Code directory</p>
+            <div class="veg-chart-list" id="sim-chart-grid"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="{{url_for('static', filename='simulation.js')}}"></script>
+  </body>
+</html>
