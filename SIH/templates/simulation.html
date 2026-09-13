@@ -46,9 +46,13 @@
           <span>NER-CryoVault</span>
         </div>
         <div class="top-nav-links">
-          <a class="top-nav-link" href="index.html">Terminal</a>
-          <a class="top-nav-link" href="allocation.html">Allocation</a>
-          <a class="top-nav-link active" href="simulation.html">Simulation</a>
+          <a class="top-nav-link" href="{{url_for('home.html')}}">Terminal</a>
+          <a class="top-nav-link" href="a{{url_for('allocation.html')}}"
+            >Allocation</a
+          >
+          <a class="top-nav-link active" href="{{url_for('simulation.html')}}"
+            >Simulation</a
+          >
         </div>
       </nav>
 
